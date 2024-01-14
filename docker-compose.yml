@@ -1,0 +1,21 @@
+version: '3.1'
+services:
+  mysql:
+    image: mysql:8.0.32
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --default-time_zone='Asia/Tokyo' --sql-mode=NO_ENGINE_SUBSTITUTION
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./var/lib/mysql:/usr/local/var/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+  postgresql:
+    image: postgres:11-alpine
+    restart: always
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - 5432:5432
+    volumes:
+      - ./var/lib/postgresql:/usr/local/var/postgresql
